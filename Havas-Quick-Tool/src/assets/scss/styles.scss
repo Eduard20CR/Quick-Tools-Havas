@@ -1,0 +1,168 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "roboto", arial, sans-serif;
+  height: 400px;
+  width: 600px;
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+// ------------------------
+// VARIABLES
+// ------------------------
+
+// FONT SIZE SYSTEM (px)
+// 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+// SPACING SYSTEM (px)
+// 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+// COLORS
+
+$primary: #d33f49;
+$secondary: #40798c;
+$tertiary: #ffb20f;
+$white: #f0f7f4;
+$black: #262730;
+
+$gray-000: #f8f9fa;
+$gray-100: #f1f3f5;
+$gray-300: #dee2e6;
+$gray-600: #868e96;
+
+// font weight
+
+$fs-light: 300;
+$fs-normal: 400;
+$fs-bold: 700;
+
+// border radius
+
+// 0.8rem
+// 0.4rem
+
+// ------------------------
+// GLOBAL
+// ------------------------
+
+a {
+  color: $white;
+  text-decoration: none;
+  font-weight: $fs-bold;
+  text-transform: uppercase;
+  color: $black;
+}
+
+// ------------------------
+// Styles
+// ------------------------
+.extensionContainer {
+  height: 100%;
+  background-color: $gray-100;
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: 9.6rem 1fr;
+    height: 100%;
+  }
+
+  // nav
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__navAnchor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 1.6rem;
+
+    background-color: $gray-300;
+    transition: background-color 0.3s, color 0.3s;
+    &.active {
+      color: $white;
+    }
+    &:hover {
+    }
+    &--1 {
+      &.active {
+        background-color: $primary;
+      }
+      &:hover {
+        background-color: $primary;
+      }
+    }
+    &--2 {
+      &.active {
+        background-color: $secondary;
+      }
+      &:hover {
+        background-color: $secondary;
+      }
+    }
+    &--3 {
+      &.active {
+        background-color: $tertiary;
+      }
+      &:hover {
+        background-color: $tertiary;
+      }
+    }
+  }
+
+  // main
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    padding: 2.4rem;
+  }
+
+  &__title {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+  }
+
+  &__filter {
+    margin-bottom: 1.6rem;
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    border: $gray-300 0.4rem solid;
+    border-radius: 0.4rem;
+  }
+
+  &__optionsContainer {
+    height: 100%;
+    margin-bottom: 2.4rem;
+    background-color: $gray-000;
+    overflow-y: scroll;
+  }
+
+  &__optionItem {
+    padding: 0.8rem;
+    border-bottom: $gray-300 0.2rem solid;
+    cursor: pointer;
+    &:hover {
+      background-color: #fff;
+    }
+  }
+
+  &__optionTitle {
+    text-transform: uppercase;
+  }
+}

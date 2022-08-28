@@ -1,5 +1,5 @@
 {
-  "name": "Havas-Quick-Tool",
+  "name": "Havas-Quick-Tools",
   "source": "src/index.html",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
@@ -9,6 +9,5 @@
   "devDependencies": {
     "@parcel/transformer-sass": "^2.7.0",
     "parcel": "^2.7.0"
-  },
-  "dependencies": {}
+  }
 }
