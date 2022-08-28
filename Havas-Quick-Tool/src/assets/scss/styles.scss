@@ -1,15 +1,8 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
 html,
 body {
   font-family: "roboto", arial, sans-serif;
   height: 400px;
   width: 600px;
-  border-radius: 0.8rem;
   overflow: hidden;
 }
 
@@ -30,8 +23,11 @@ html {
 // COLORS
 
 $primary: #d33f49;
+$primary-2: #dc656d;
 $secondary: #40798c;
+$secondary-2: #6694a3;
 $tertiary: #ffb20f;
+$tertiary-2: #ffc13f;
 $white: #f0f7f4;
 $black: #262730;
 
@@ -42,9 +38,9 @@ $gray-600: #868e96;
 
 // font weight
 
-$fs-light: 300;
-$fs-normal: 400;
-$fs-bold: 700;
+$fw-light: 300;
+$fw-normal: 400;
+$fw-bold: 700;
 
 // border radius
 
@@ -55,10 +51,17 @@ $fs-bold: 700;
 // GLOBAL
 // ------------------------
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: $black;
+}
+
 a {
   color: $white;
   text-decoration: none;
-  font-weight: $fs-bold;
+  font-weight: $fw-bold;
   text-transform: uppercase;
   color: $black;
 }
@@ -96,30 +99,13 @@ a {
       color: $white;
     }
     &:hover {
+      color: $white;
     }
     &--1 {
-      &.active {
-        background-color: $primary;
-      }
-      &:hover {
-        background-color: $primary;
-      }
     }
     &--2 {
-      &.active {
-        background-color: $secondary;
-      }
-      &:hover {
-        background-color: $secondary;
-      }
     }
     &--3 {
-      &.active {
-        background-color: $tertiary;
-      }
-      &:hover {
-        background-color: $tertiary;
-      }
     }
   }
 
@@ -137,8 +123,14 @@ a {
     text-transform: uppercase;
   }
 
-  &__filter {
+  &__inputContainer {
     margin-bottom: 1.6rem;
+    display: flex;
+    gap: 2.4rem;
+    align-items: stretch;
+  }
+
+  &__filter {
     display: block;
     width: 100%;
     padding: 0.8rem;
@@ -146,11 +138,19 @@ a {
     border-radius: 0.4rem;
   }
 
+  &__colorPicker {
+    display: block;
+    height: 100%;
+    border: none;
+    border-radius: 0.3rem;
+  }
+
   &__optionsContainer {
     height: 100%;
     margin-bottom: 2.4rem;
     background-color: $gray-000;
     overflow-y: scroll;
+    height: 18.5rem;
   }
 
   &__optionItem {
@@ -164,5 +164,25 @@ a {
 
   &__optionTitle {
     text-transform: uppercase;
+  }
+
+  &__btnSubmit {
+    border: none;
+    color: $white;
+    border-radius: 0.3rem;
+    padding: 0.8rem 1.6rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: $fw-bold;
+
+    &--1 {
+      background-image: linear-gradient(-45deg, $primary, $primary-2);
+    }
+    &--2 {
+      background-image: linear-gradient(-45deg, $secondary, $secondary-2);
+    }
+    &--3 {
+      background-image: linear-gradient(-45deg, $tertiary, $tertiary-2);
+    }
   }
 }

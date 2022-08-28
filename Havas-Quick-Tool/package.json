@@ -3,11 +3,16 @@
   "source": "src/index.html",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "start": "parcel",
-    "build": "parcel build"
+    "start": "parcel --open",
+    "build": "parcel build",
+    "build-e": "parcel build src/manifest.json --config @parcel/config-webextension"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.7.0",
     "parcel": "^2.7.0"
+  },
+  "dependencies": {
+    "@parcel/config-webextension": "^2.7.0",
+    "gsap": "^3.11.0"
   }
 }
