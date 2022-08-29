@@ -7,7 +7,6 @@ class BtnSubmit {
     const newClassToAdd = `extensionContainer__btnSubmit${event.target.classList[1].slice(
       -3
     )}`;
-    console.log(newClassToAdd);
 
     for (let i = 1; i <= 3; i++) {
       if (

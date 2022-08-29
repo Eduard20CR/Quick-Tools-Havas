@@ -1,3 +1,7 @@
+const returnScriptInfo = function () {
+  return ["", "", "", "", "", "", "", "", "", "", ""];
+};
+
 const runChromeScript = async function () {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
@@ -9,4 +13,4 @@ const runChromeScript = async function () {
   });
 };
 
-export { runChromeScript };
+export { runChromeScript, returnScriptInfo };
