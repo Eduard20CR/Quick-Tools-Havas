@@ -1,5 +1,18 @@
+let stringFilterKeyword = "";
+let actualTab = "sites";
+
+const setFilterKeyword = function (newStringKeword) {
+  stringFilterKeyword = newStringKeword;
+  // console.log(stringFilterKeyword);
+};
+
+const setActualTab = function (tabSelected) {
+  actualTab = tabSelected;
+  // console.log(tabSelected);
+};
+
 const returnScriptInfo = function () {
-  return ["", "", "", "", "", "", "", "", "", "", ""];
+  return ["", ""];
 };
 
 const runChromeScript = async function () {
@@ -13,4 +26,4 @@ const runChromeScript = async function () {
   });
 };
 
-export { runChromeScript, returnScriptInfo };
+export { runChromeScript, returnScriptInfo, setFilterKeyword, setActualTab };

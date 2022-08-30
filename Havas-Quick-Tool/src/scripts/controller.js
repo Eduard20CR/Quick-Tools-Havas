@@ -1,31 +1,40 @@
 import * as model from "./model";
-import { navModule } from "./views/nav";
-import { BtnSubmitModule } from "./views/btnSubmit";
-import { ScriptOptionsModule } from "./views/scriptOptions";
+import { navModule } from "./views/navView";
+import { BtnSubmitModule } from "./views/btnSubmitView";
+import { ScriptOptionsModule } from "./views/scriptOptionsView";
+import { InputFilterModule } from "./views/inputFilterView";
 
 const onSwitchTab = function (event) {
   BtnSubmitModule.changeBtnColor(event);
+  model.setActualTab(event.target.dataset.tab);
+};
+
+const onScriptSelected = function (event) {
+  console.log("hello");
+};
+
+const loadInfo = function () {
+  const allScripts = model.returnScriptInfo();
+
+  const ScriptsFilteredByTab = [];
+
+  ScriptOptionsModule.generateOptions(allScripts);
+};
+
+const filterUpdated = function (event) {
+  model.setFilterKeyword(event.target.value);
 };
 
 const onSubmitFunctionality = function (event) {
   model.runChromeScript();
 };
 
-const onScriptSelected = function (event) {
-  console.log("hello");
-  // console.log(event.target.closest(".extensionContainer__optionItem"));
-};
-
-const loadInfo = function () {
-  const scripts = model.returnScriptInfo();
-
-  ScriptOptionsModule.generateOptions(scripts);
-};
-
 (function () {
   loadInfo();
 
   navModule.loadTabOnInit();
+
+  InputFilterModule.handlerInputFilter(filterUpdated);
   navModule.handlerSwitchTab(onSwitchTab);
   ScriptOptionsModule.handlerSelectedScript(onScriptSelected);
   BtnSubmitModule.handlerSubmitScript(onSubmitFunctionality);
