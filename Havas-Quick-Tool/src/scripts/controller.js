@@ -7,22 +7,27 @@ import { InputFilterModule } from "./views/inputFilterView";
 const onSwitchTab = function (event) {
   BtnSubmitModule.changeBtnColor(event);
   model.setActualTab(event.target.dataset.tab);
+  loadInfo();
 };
 
 const onScriptSelected = function (event) {
-  console.log("hello");
+  // console.log(event.target.closest(".extensionContainer__optionItem"));
+  model.setScriptSelected(event);
 };
 
 const loadInfo = function () {
   const allScripts = model.returnScriptInfo();
 
-  const ScriptsFilteredByTab = [];
+  const ScriptsFilteredByTab = model.filterScriptByTab(allScripts);
 
-  ScriptOptionsModule.generateOptions(allScripts);
+  const ScriptsFilteredInput = model.filterScriptByInput(ScriptsFilteredByTab);
+
+  ScriptOptionsModule.generateOptions(ScriptsFilteredInput);
 };
 
 const filterUpdated = function (event) {
   model.setFilterKeyword(event.target.value);
+  loadInfo();
 };
 
 const onSubmitFunctionality = function (event) {

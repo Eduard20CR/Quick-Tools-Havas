@@ -6,15 +6,18 @@ class ScriptOptions {
   constructor() {}
 
   generateHTMLCode(elementsData) {
-    const htmlCode = elementsData
-      .map(() => {
-        return `
-        <div class="extensionContainer__optionItem">
-              <p class="extensionContainer__optionTitle">Lorem, ipsum dolor.</p>
-        </div>
-       `;
-      })
-      .join("");
+    const htmlCode = elementsData.map((el) => {
+      const parenteDiv = document.createElement("DIV");
+      parenteDiv.dataset.scriptId = el.id;
+      parenteDiv.classList.add("extensionContainer__optionItem");
+
+      const childParagraph = document.createElement("P");
+      childParagraph.textContent = el.title;
+      childParagraph.classList = "extensionContainer__optionTitle";
+
+      parenteDiv.appendChild(childParagraph);
+      return parenteDiv;
+    });
     return htmlCode;
   }
 
@@ -24,7 +27,10 @@ class ScriptOptions {
   }
 
   loadAllScriptOptions(HTMLContent) {
-    this._parentElement.innerHTML = HTMLContent;
+    this._parentElement.innerHTML = "";
+    HTMLContent.forEach((elItem) => {
+      this._parentElement.appendChild(elItem);
+    });
   }
 
   handlerSelectedScript(callback) {
