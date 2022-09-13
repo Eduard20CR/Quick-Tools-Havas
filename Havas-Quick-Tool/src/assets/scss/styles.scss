@@ -35,6 +35,8 @@ $gray-000: #f8f9fa;
 $gray-100: #f1f3f5;
 $gray-300: #dee2e6;
 $gray-600: #868e96;
+$gray-700: #495057;
+$gray-800: #343a40;
 
 // font weight
 
@@ -126,11 +128,19 @@ a {
   &__inputContainer {
     margin-bottom: 1.6rem;
     display: flex;
-    gap: 2.4rem;
+    gap: 1.2rem;
     align-items: stretch;
   }
 
   &__filter {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    border: $gray-300 0.4rem solid;
+    border-radius: 0.4rem;
+  }
+
+  &__category {
     display: block;
     width: 100%;
     padding: 0.8rem;
@@ -143,6 +153,8 @@ a {
     height: 100%;
     border: none;
     border-radius: 0.3rem;
+    min-width: 4.1rem;
+    width: 4.1rem;
   }
 
   &__optionsContainer {
@@ -154,7 +166,7 @@ a {
   }
 
   &__optionItem {
-    padding: 0.8rem;
+    padding: 1rem 1.6rem;
     border-bottom: $gray-300 0.2rem solid;
     cursor: pointer;
     &:hover {
@@ -162,8 +174,20 @@ a {
     }
   }
 
-  &__optionTitle {
+  &__optionTitle,
+  &__optionTitleNoFound {
     text-transform: uppercase;
+    font-size: 1.4rem;
+    color: $gray-800;
+  }
+  &__optionTitleNoFound {
+    color: $gray-600;
+  }
+  &__optionsNoFound {
+    height: 18.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &__btnSubmit {

@@ -22,6 +22,8 @@ class ScriptOptions {
   }
 
   generateOptions(elementsArr) {
+    if (elementsArr.length == 0) return this.loadNoResultsFound();
+
     const allHTMLContent = this.generateHTMLCode(elementsArr);
     this.loadAllScriptOptions(allHTMLContent);
   }
@@ -31,6 +33,18 @@ class ScriptOptions {
     HTMLContent.forEach((elItem) => {
       this._parentElement.appendChild(elItem);
     });
+  }
+
+  loadNoResultsFound() {
+    this._parentElement.innerHTML = "";
+    const htmlCode = `
+      <div class="extensionContainer__optionsNoFound">
+        <p class="extensionContainer__optionTitleNoFound">
+          No options found
+        </p>
+      </div>
+      `;
+    this._parentElement.insertAdjacentHTML("beforeend", htmlCode);
   }
 
   handlerSelectedScript(callback) {

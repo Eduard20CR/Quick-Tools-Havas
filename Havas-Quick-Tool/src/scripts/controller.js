@@ -3,6 +3,7 @@ import { navModule } from "./views/navView";
 import { BtnSubmitModule } from "./views/btnSubmitView";
 import { ScriptOptionsModule } from "./views/scriptOptionsView";
 import { InputFilterModule } from "./views/inputFilterView";
+import { CategoryFilterModule } from "./views/categoryFilterView";
 
 const onSwitchTab = function (event) {
   BtnSubmitModule.changeBtnColor(event);
@@ -22,11 +23,23 @@ const loadInfo = function () {
 
   const ScriptsFilteredInput = model.filterScriptByInput(ScriptsFilteredByTab);
 
-  ScriptOptionsModule.generateOptions(ScriptsFilteredInput);
+  const ScriptsFilteredCategory =
+    model.filterScriptByCategory(ScriptsFilteredInput);
+
+  const ScriptsSortedByAlphabet = model.sortScriptsByAlphabet(
+    ScriptsFilteredCategory
+  );
+
+  ScriptOptionsModule.generateOptions(ScriptsSortedByAlphabet);
 };
 
-const filterUpdated = function (event) {
+const inputFilterUpdated = function (event) {
   model.setFilterKeyword(event.target.value);
+  loadInfo();
+};
+
+const categoryFilterUpdated = function (event) {
+  model.setFilterCategory(event.target.value);
   loadInfo();
 };
 
@@ -39,8 +52,9 @@ const onSubmitFunctionality = function (event) {
 
   navModule.loadTabOnInit();
 
-  InputFilterModule.handlerInputFilter(filterUpdated);
+  InputFilterModule.handlerInputFilter(inputFilterUpdated);
   navModule.handlerSwitchTab(onSwitchTab);
   ScriptOptionsModule.handlerSelectedScript(onScriptSelected);
   BtnSubmitModule.handlerSubmitScript(onSubmitFunctionality);
+  CategoryFilterModule.handlerCategoryFilter(categoryFilterUpdated);
 })();

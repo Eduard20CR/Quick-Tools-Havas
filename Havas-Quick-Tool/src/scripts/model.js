@@ -1,56 +1,22 @@
+import { scriptsArr } from "./config";
+
 let stringFilterKeyword = "";
+let stringFilterCategory = "";
 let actualTab = "sites";
 let idOfScriptSelected;
 
-let scriptsArr = [
-  // Websites
-  {
-    id: 1,
-    script: "",
-    title: "Marcar links",
-    description: "",
-    category: "sites",
-  },
-  // Email
-  {
-    id: 2,
-    script: "",
-    title: "Marcar links",
-    description: "",
-    category: "emails",
-  },
-  {
-    id: 3,
-    script: "",
-    title: "Marcar Bold",
-    description: "",
-    category: "emails",
-  },
-  {
-    id: 4,
-    script: "",
-    title: "Marcar Italic",
-    description: "",
-    category: "emails",
-  },
-  // Banners
-  {
-    id: 5,
-    script: "",
-    title: "Centrar Banne",
-    description: "",
-    category: "banners",
-  },
-];
+// SETTERS
 
 const setFilterKeyword = function (newStringKeword) {
   stringFilterKeyword = newStringKeword;
-  // console.log(stringFilterKeyword);
+};
+
+const setFilterCategory = function (newStringCategory) {
+  stringFilterCategory = newStringCategory;
 };
 
 const setActualTab = function (tabSelected) {
   actualTab = tabSelected;
-  // console.log(tabSelected);
 };
 
 const setScriptSelected = function (scriptSelected) {
@@ -58,7 +24,6 @@ const setScriptSelected = function (scriptSelected) {
   const scriptIdInDataSet = scriptSelected.target.closest(
     ".extensionContainer__optionItem"
   ).dataset.scriptId;
-  console.log(scriptIdInDataSet);
   idOfScriptSelected = scriptIdInDataSet;
 };
 
@@ -66,17 +31,16 @@ const returnScriptInfo = function () {
   return scriptsArr;
 };
 
+// FILTERS
+
 const filterScriptByTab = function (allScripts) {
   return allScripts.filter((scriptItem) => {
-    return scriptItem.category === actualTab;
+    return scriptItem.scope === actualTab;
   });
 };
 
 const filterScriptByInput = function (allScripts) {
   return allScripts.filter((scriptItem) => {
-    // console.log(scriptItem);
-    // console.log(stringFilterKeyword);
-    // console.log();
     return (
       scriptItem.title.toLowerCase().includes(stringFilterKeyword) ||
       scriptItem.description.toLowerCase().includes(stringFilterKeyword)
@@ -84,15 +48,43 @@ const filterScriptByInput = function (allScripts) {
   });
 };
 
-const runChromeScript = async function () {
-  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    function: () => {
-      console.log("hello");
-    },
+const filterScriptByCategory = function (allScripts) {
+  if (stringFilterCategory === "") return allScripts;
+  return allScripts.filter((scriptItem) => {
+    return scriptItem.category === stringFilterCategory;
   });
+};
+
+// SORTER
+
+const sortScriptsByAlphabet = function (allScripts) {
+  return allScripts.sort((scriptItem1, scriptItem2) => {
+    const title1 = scriptItem1.title.toUpperCase();
+    const title2 = scriptItem2.title.toUpperCase();
+    return title1 > title2 ? 1 : -1;
+  });
+};
+
+// CHROME
+
+const runChromeScript = async function () {
+  if (!idOfScriptSelected) return;
+
+  const arraySelected = scriptsArr.find((e) => {
+    return e.id === idOfScriptSelected;
+  });
+
+  const scriptToBeRun = new Function(arraySelected.script);
+
+  scriptToBeRun();
+
+  // let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  // chrome.scripting.executeScript({
+  //   target: { tabId: tab.id },
+  //   function: () => {
+  //     console.log("hello");
+  //   },
+  // });
 };
 
 export {
@@ -103,4 +95,7 @@ export {
   filterScriptByTab,
   filterScriptByInput,
   setScriptSelected,
+  setFilterCategory,
+  filterScriptByCategory,
+  sortScriptsByAlphabet,
 };
