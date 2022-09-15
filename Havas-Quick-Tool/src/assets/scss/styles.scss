@@ -71,6 +71,7 @@ a {
 // ------------------------
 // Styles
 // ------------------------
+
 .extensionContainer {
   height: 100%;
   background-color: $gray-100;
@@ -158,6 +159,7 @@ a {
   }
 
   &__optionsContainer {
+    position: relative;
     height: 100%;
     margin-bottom: 2.4rem;
     background-color: $gray-000;
@@ -166,11 +168,30 @@ a {
   }
 
   &__optionItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 1rem 1.6rem;
     border-bottom: $gray-300 0.2rem solid;
+    gap: 1.2rem;
+    height: 4.2rem;
+
     cursor: pointer;
     &:hover {
       background-color: #fff;
+      & .extensionContainer__descriptionIcon {
+        display: flex;
+      }
+      & .extensionContainer__favoriteIcon {
+        display: block;
+      }
+    }
+    &.favorite {
+      & .extensionContainer__favoriteIcon {
+        display: block;
+        fill: $tertiary;
+        stroke: $tertiary;
+      }
     }
   }
 
@@ -188,6 +209,69 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  &__descriptionIcon {
+    display: none;
+    margin-left: auto;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.2rem;
+    border: $gray-800 0.1rem solid;
+    border-radius: 100000rem;
+    width: 2rem;
+    height: 2rem;
+    color: $gray-800;
+
+    &:hover {
+      color: $secondary;
+      border-color: $secondary;
+
+      & .extensionContainer__popUpDescription {
+        display: block;
+      }
+    }
+  }
+
+  &__popUpDescription {
+    display: none;
+    position: absolute;
+    top: 49%;
+    left: 69%;
+
+    background-color: rgba(#dee2e6, $alpha: 0.5);
+    backdrop-filter: blur(2px);
+    border-radius: 0.4rem;
+    width: 20rem;
+    padding: 1.6rem;
+    transform: translate(-50%, -50%);
+
+    box-shadow: 0px 0px 7px rgba($color: #000000, $alpha: 0.5);
+  }
+
+  &__popUpTitle {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  &__popUpBody {
+    margin-bottom: 0.8rem;
+    height: 7rem;
+    overflow-y: auto;
+    padding-right: 1.2rem;
+  }
+
+  &__popUpCategory {
+  }
+
+  &__favoriteIcon {
+    display: none;
+    width: 2rem;
+    &:hover {
+      stroke: #ffb20f;
+    }
   }
 
   &__btnSubmit {

@@ -4,6 +4,7 @@ import { BtnSubmitModule } from "./views/btnSubmitView";
 import { ScriptOptionsModule } from "./views/scriptOptionsView";
 import { InputFilterModule } from "./views/inputFilterView";
 import { CategoryFilterModule } from "./views/categoryFilterView";
+import { colorPickerModule } from "./views/colorPickerView";
 
 const onSwitchTab = function (event) {
   BtnSubmitModule.changeBtnColor(event);
@@ -33,6 +34,10 @@ const loadInfo = function () {
   ScriptOptionsModule.generateOptions(ScriptsSortedByAlphabet);
 };
 
+const colorPickerUpdated = function (event) {
+  model.setColorPicked(event.target.value);
+};
+
 const inputFilterUpdated = function (event) {
   model.setFilterKeyword(event.target.value);
   loadInfo();
@@ -57,4 +62,5 @@ const onSubmitFunctionality = function (event) {
   ScriptOptionsModule.handlerSelectedScript(onScriptSelected);
   BtnSubmitModule.handlerSubmitScript(onSubmitFunctionality);
   CategoryFilterModule.handlerCategoryFilter(categoryFilterUpdated);
+  colorPickerModule.handlercolorPicker(colorPickerUpdated);
 })();

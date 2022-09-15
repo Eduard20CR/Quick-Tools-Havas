@@ -4,6 +4,13 @@ let stringFilterKeyword = "";
 let stringFilterCategory = "";
 let actualTab = "sites";
 let idOfScriptSelected;
+let colorSelected = "";
+
+// RETURN
+
+const returnScriptInfo = function () {
+  return scriptsArr;
+};
 
 // SETTERS
 
@@ -27,8 +34,8 @@ const setScriptSelected = function (scriptSelected) {
   idOfScriptSelected = scriptIdInDataSet;
 };
 
-const returnScriptInfo = function () {
-  return scriptsArr;
+const setColorPicked = function (colorPicked) {
+  colorSelected = colorPicked;
 };
 
 // FILTERS
@@ -74,17 +81,12 @@ const runChromeScript = async function () {
     return e.id === idOfScriptSelected;
   });
 
-  const scriptToBeRun = new Function(arraySelected.script);
-
-  scriptToBeRun();
-
-  // let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  // chrome.scripting.executeScript({
-  //   target: { tabId: tab.id },
-  //   function: () => {
-  //     console.log("hello");
-  //   },
-  // });
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func: arraySelected.script,
+    args: [colorSelected],
+  });
 };
 
 export {
@@ -98,4 +100,5 @@ export {
   setFilterCategory,
   filterScriptByCategory,
   sortScriptsByAlphabet,
+  setColorPicked,
 };
